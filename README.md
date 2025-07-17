@@ -12,8 +12,11 @@ Fully tested using Mocha and Chai
 
 Project Structure
 src/sweetShop.js – Business logic using a dictionary
+
 public/index.html – User interface
+
 public/app.js – Frontend logic for interacting with the UI
+
 test/sweetShop.test.js – Unit tests
 
 
