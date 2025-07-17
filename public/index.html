@@ -266,6 +266,113 @@ td button.delete-button:hover {
         font-size: 0.85em;
       }
     }
+  /* ==== Modal Overlay & Layout ==== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 62, 80, 0.5); /* Semi-dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+/* ==== Modal Box Styling ==== */
+.modal-content {
+  background-color: #ffffff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: slideUp 0.3s ease-out;
+}
+
+/* ==== Modal Message ==== */
+#modal-message {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* ==== Modal Input Field ==== */
+#modal-input {
+  padding: 10px;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+#modal-input:focus {
+  border-color: #6a89cc;
+  outline: none;
+}
+
+/* ==== Modal Buttons ==== */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal-buttons button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#modal-ok {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+#modal-ok:hover {
+  background-color: #43a047;
+}
+
+#modal-cancel {
+  background-color: #e74c3c; /* Red */
+  color: white;
+}
+
+#modal-cancel:hover {
+  background-color: #c0392b;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ==== Animations ==== */
+@keyframes fadeIn {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(44, 62, 80, 0.5); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
   </style>
 </head>
 <body>
@@ -353,6 +460,18 @@ td button.delete-button:hover {
     </thead>
     <tbody id="sweetTable"></tbody>
   </table>
+
+  <!-- Modal Template -->
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <p id="modal-message"></p>
+    <input type="number" id="modal-input" class="hidden" />
+    <div class="modal-buttons">
+      <button id="modal-ok">OK</button>
+      <button id="modal-cancel" class="hidden">Cancel</button>
+    </div>
+  </div>
+</div>
 
   <script src="../src/sweetShop.js"></script>
   <script src="app.js"></script>
