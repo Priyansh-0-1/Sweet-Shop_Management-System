@@ -1,14 +1,15 @@
 /**
  * @file sweetShop.test.js
- * @description Unit tests for SweetShop Management System using dictionary-based inventory.
+ * @description Unit tests for the SweetShop Management System using a dictionary-based inventory.
  *
- * These tests follow the Test-Driven Development (TDD) approach.
- * Each test verifies one key functionality — such as searching, sorting, purchasing, or restocking.
+ * These tests follow the Test-Driven Development (TDD) methodology.
+ * Each test verifies a key functionality — such as adding, searching, sorting, purchasing, or restocking.
+ * AI-driven insights contributed to test design and overall development flow.
  *
  * Author: Priyansh Liya
  * Created: July 2025
- * Assisted by: ChatGPT (OpenAI)
  */
+
 
 const { expect } = require("chai");
 const SweetShop = require("../src/sweetShop");
