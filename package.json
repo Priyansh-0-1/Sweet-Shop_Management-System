@@ -1,0 +1,21 @@
+{
+  "name": "sweet-shop-system",
+  "version": "1.0.0",
+  "description": "A simple sweet shop inventory app built using **JavaScript** and developed with **Test-Driven Development (TDD)** methodology.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Priyansh Liya",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^5.2.1",
+    "mocha": "^11.7.1"
+  },
+  "dependencies": {
+    "uuid": "^11.1.0"
+  }
+}
