@@ -1,4 +1,5 @@
 Sweet Shop Management System
+
 This project is a simple inventory management system for a sweet shop. It was built using the Test-Driven Development (TDD) approach.
 
 Features
