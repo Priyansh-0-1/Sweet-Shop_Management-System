@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!--  Makes it mobile-responsive -->
+  <title>Sweet Shop Management</title>
+  <style>
+   body {
+    font-family: 'Poppins', sans-serif; /* Modern font */
+    margin: 0;
+    padding: 20px;
+    background-color: #eef2f7; /* Light background */
+    color: #333;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #34495e;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #aec6cf; /* Subtle underline */
+    padding-bottom: 5px;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Increased gap */
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: center; /* Center items in form */
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+    padding: 12px 15px; /* More padding */
+    height: 45px; /* Consistent height */
+    font-size: 1em;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px; /* Softer corners */
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Smooth transitions */
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    border-color: #6a89cc;
+    box-shadow: 0 0 8px rgba(106, 137, 204, 0.2);
+    outline: none;
+}
+
+.form-container button {
+    width: 150px; /* Slightly wider buttons */
+    background-color: #4CAF50; /* Green for add */
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-container button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Specific styling for search/sort buttons if different actions */
+.search-sort-wrapper .form-container button {
+    background-color: #007bff; /* Blue for search/sort */
+}
+
+.search-sort-wrapper .form-container button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Search and Sort Wrapper */
+.search-sort-wrapper {
+    display: flex;
+    justify-content: space-around; /* Distribute space */
+    align-items: flex-start;
+    gap: 25px; /* Increased gap */
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.search-sort-wrapper > div {
+    flex: 1; /* Allow sections to grow */
+    min-width: 300px; /* Ensure minimum width for readability */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-sort-wrapper h2 {
+    margin: 0 0 15px 0;
+    font-size: 1.5em;
+    color: #2c3e50;
+    border-bottom: none; /* Remove underline for inner h2 */
+}
+
+.search-sort-wrapper .form-container {
+    margin-bottom: 0; /* Remove extra margin from inner form-container */
+    padding: 0; /* Remove padding from inner form-container */
+    box-shadow: none; /* Remove shadow from inner form-container */
+    background-color: transparent; /* Make inner form-container transparent */
+    justify-content: flex-start; /* Align items to start for search/sort */
+    gap: 10px; /* Smaller gap for elements within search/sort forms */
+}
+
+.search-sort-wrapper .form-container input,
+.search-sort-wrapper .form-container select {
+    flex-grow: 1; /* Allow search input and sort selects to grow */
+    width: auto; /* Override fixed width */
+}
+
+
+/* Table Styling */
+table {
+    width: 100%;
+    max-width: 1200px; /* Wider table */
+    border-collapse: separate; /* Use separate for rounded corners */
+    border-spacing: 0;
+    margin: 20px auto; /* Center table with margin */
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden; /* Ensures rounded corners are applied */
+}
+
+thead {
+    background-color: #f0f4f8; /* Lighter header background */
+}
+
+th {
+    text-align: left;
+    padding: 15px 20px; /* More padding */
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #34495e;
+    border-bottom: 2px solid #e0e6ed;
+}
+
+td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eff2f7;
+    vertical-align: middle;
+    font-size: 0.95em;
+    color: #555;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9fbfd; /* Zebra striping */
+}
+
+tbody tr:hover {
+    background-color: #eef7ff; /* Hover effect */
+    transition: background-color 0.2s ease;
+}
+
+td button {
+    margin-right: 8px; /* More space between buttons */
+    padding: 8px 15px; /* Larger buttons */
+    font-size: 0.9em;
+    border: none;
+    border-radius: 6px; /* Slightly more rounded */
+    cursor: pointer;
+    background-color: #6a89cc; /* Action button color */
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+td button:hover {
+    background-color: #546eab;
+    transform: translateY(-1px);
+}
+
+td button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Add specific colors for Edit and Delete buttons if desired */
+td button.edit-button { /* Assuming you add a class 'edit-button' */
+    background-color: #28a745; /* Green for edit */
+}
+
+td button.edit-button:hover {
+    background-color: #218838;
+}
+
+td button.delete-button { /* Assuming you add a class 'delete-button' */
+    background-color: #dc3545; /* Red for delete */
+}
+
+td button.delete-button:hover {
+    background-color: #c82333;
+}
+/* Add media queries  for full responsiveness */
+  @media (max-width: 768px) {
+      .form-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .form-container input,
+      .form-container select,
+      .form-container button {
+        width: 100%; /* Full width on small screens */
+      }
+
+      .search-sort-wrapper {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .search-sort-wrapper > div {
+        width: 100%;
+      }
+
+      table {
+        font-size: 0.9em;
+        overflow-x: auto;
+        display: block;
+      }
+
+      th, td {
+        padding: 10px;
+      }
+
+      td button {
+        margin: 5px 0;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8em;
+      }
+
+      h2 {
+        font-size: 1.3em;
+      }
+
+      td,
+      th {
+        font-size: 0.85em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sweet Shop Inventory</h1>
+
+  <div class="form-container">
+    <input type="text" id="name" placeholder="Name" />
+    <select id="category">
+      <option value="">-- Select Category --</option>
+      <option value="Chocolate">Chocolate</option>
+      <option value="Candy">Candy</option>
+      <option value="Pastry">Pastry</option>
+      <option value="Nut-Based">Nut-Based</option>
+      <option value="Milk-Based">Milk-Based</option>
+      <option value="Vegetable-Based">Vegetable-Based</option>
+    </select>
+    <input type="number" id="price" placeholder="Price" />
+    <input type="number" id="quantity" placeholder="Quantity" />
+    <button onclick="addSweet()">Add Sweet</button>
+  </div>
+
+  <div class="search-sort-wrapper">
+    <!-- Search Section (Only by Name & Price Range) -->
+    <div>
+      <h2>Search Sweets</h2>
+      <div class="form-container">
+       
+        <input 
+          type="text"
+          id="searchName"
+          placeholder="Name"
+          list="sweetSuggestions"
+          oninput="updateSuggestions()"
+        />
+      <datalist id="sweetSuggestions"></datalist>
+
+        <input type="number" id="minPrice" placeholder="Min Price" />
+        <input type="number" id="maxPrice" placeholder="Max Price" />
+        <button onclick="searchSweets()">Search</button>
+      </div>
+    </div>
+  
+    <!--  Sort + Filter Section -->
+    <div>
+      <h2>Sort / Filter</h2>
+      <div class="form-container">
+        <select id="searchCategory">
+          <option value="">All Categories</option>
+          <option value="Chocolate">Chocolate</option>
+          <option value="Candy">Candy</option>
+          <option value="Pastry">Pastry</option>
+          <option value="Nut-Based">Nut-Based</option>
+          <option value="Milk-Based">Milk-Based</option>
+          <option value="Vegetable-Based">Vegetable-Based</option>
+        </select>
+  
+        <select id="sortField">
+          <option value="">-- Sort Field --</option>
+          <option value="price">Price</option>
+          <option value="name">Name</option>
+        </select>
+  
+        <select id="sortOrder">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+  
+        <button onclick="sortSweets()">Apply</button>
+      </div>
+    </div>
+  </div>
+  
+  <h2>Inventory</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>List</th> <!-- Serial number shown -->
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="sweetTable"></tbody>
+  </table>
+
+  <script src="../src/sweetShop.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
